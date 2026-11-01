@@ -2,12 +2,12 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { testCli } from '../scripts/vscode.mjs';
 
-test('Windows extension installation uses Electron CLI without a command shell', () => {
+test('Windows extension installation uses the vendor wrapper rather than a hard-coded internal entry', () => {
   const executable = 'C:\\QA Space\\VS Code\\Code.exe';
   const cli = testCli(executable, 'win32');
-  assert.equal(cli.executable, executable);
-  assert.deepEqual(cli.args, ['C:\\QA Space\\VS Code\\resources\\app\\out\\cli.js']);
-  assert.deepEqual(cli.env, { ELECTRON_RUN_AS_NODE: '1' });
+  assert.equal(cli.executable, 'C:\\QA Space\\VS Code\\bin\\code.cmd');
+  assert.deepEqual(cli.args, []);
+  assert.deepEqual(cli.env, {});
   assert.equal('shell' in cli, false);
 });
 test('Unix CLI helper does not inject default machine or test-profile directories', () => {

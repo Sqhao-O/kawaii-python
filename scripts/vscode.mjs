@@ -15,8 +15,10 @@ export async function testExecutable(version = 'stable') {
 }
 export function testCli(executable, platform = process.platform) {
   if (platform === 'win32') {
-    // Run the same CLI entry as code.cmd without a shell or string interpolation.
-    return { executable, args: [path.win32.join(path.win32.dirname(executable), 'resources/app/out/cli.js')], env: { ELECTRON_RUN_AS_NODE: '1' } };
+    // Use the vendor's wrapper: the internal CLI location may change between builds.
+    // cross-spawn escapes .cmd invocations on Windows without hand-built shell text.
+    const name = path.win32.basename(executable) === 'Code - Insiders.exe' ? 'code-insiders.cmd' : 'code.cmd';
+    return { executable: path.win32.join(path.win32.dirname(executable), 'bin', name), args: [], env: {} };
   }
   const [cli, ...args] = resolveCliArgsFromVSCodeExecutablePath(executable, { reuseMachineInstall: true });
   return { executable: cli, args, env: {} };

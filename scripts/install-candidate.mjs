@@ -1,5 +1,5 @@
 import { testExecutable, testCli } from './vscode.mjs';
-import { spawn } from 'node:child_process';
+import spawn from 'cross-spawn';
 import path from 'node:path';
 const version = process.argv[2];
 if (!/^\d+\.\d+\.\d+$/.test(version || '')) throw new Error('需要精确的稳定版本号');

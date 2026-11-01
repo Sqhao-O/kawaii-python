@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
-import { spawn } from 'node:child_process';
+import spawn from 'cross-spawn';
 import assert from 'node:assert/strict';
 import { testExecutable, testCli } from './vscode.mjs';
 import { build } from 'esbuild';
@@ -27,7 +27,13 @@ async function run(executable, args, env = {}, log) {
   });
   const output = Buffer.concat(chunks).toString();
   if (log) await fs.writeFile(log, output);
-  if (result !== 0) throw new Error(`执行失败（${result}）：${output.slice(-5000)}`);
+  if (result !== 0) {
+    let diagnostic = '';
+    if (process.platform === 'win32' && executable === cli) {
+      try { diagnostic = '\nOfficial wrapper:\n' + await fs.readFile(cli, 'utf8'); } catch { /* original error remains authoritative */ }
+    }
+    throw new Error(`执行失败（${result}）：${output.slice(-5000)}${diagnostic}`);
+  }
 }
 // A developer can provide an existing extension directory; it is copied, never patched in place.
 if (process.env.KAWAII_LOCAL_EXTENSIONS) {
