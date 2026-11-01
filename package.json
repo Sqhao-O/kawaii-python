@@ -1,0 +1,116 @@
+{
+  "name": "kawaii-python-diagnostics",
+  "displayName": "Kawaii Python Diagnostics",
+  "description": "本地文案补丁：首次启用后修改 Pylance 中文消息表，自动备份并支持恢复。",
+  "version": "0.1.0",
+  "publisher": "kawaii-python",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.107.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "python",
+    "pylance",
+    "diagnostics",
+    "kawaii",
+    "中文"
+  ],
+  "main": "./dist/extension.js",
+  "extensionKind": [
+    "ui"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false
+    },
+    "virtualWorkspaces": {
+      "supported": false
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "kawaiiPython.enable",
+        "title": "启用可爱报错",
+        "category": "Kawaii Python"
+      },
+      {
+        "command": "kawaiiPython.restore",
+        "title": "恢复原版并停用",
+        "category": "Kawaii Python"
+      },
+      {
+        "command": "kawaiiPython.check",
+        "title": "检查兼容性",
+        "category": "Kawaii Python"
+      },
+      {
+        "command": "kawaiiPython.showLogs",
+        "title": "显示日志",
+        "category": "Kawaii Python"
+      },
+      {
+        "command": "kawaiiPython.reload",
+        "title": "重载窗口",
+        "category": "Kawaii Python"
+      }
+    ],
+    "configuration": {
+      "title": "Kawaii Python",
+      "properties": {
+        "kawaiiPython.autoApplyUpdates": {
+          "type": "boolean",
+          "default": true,
+          "scope": "machine",
+          "description": "首次启用后，自动为已验证兼容的 Pylance 更新重新应用文案。未知版本不会修改。"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts tests/*.test.mjs",
+    "catalog:check": "node --import tsx scripts/maintain.ts validate",
+    "upstream:check": "node --import tsx scripts/maintain.ts upstream",
+    "inspect": "node --import tsx scripts/maintain.ts inspect",
+    "test:integration": "node scripts/integration.mjs",
+    "package": "npm run build && vsce package --no-dependencies --pre-release --out artifacts/kawaii-python-diagnostics-0.1.0.vsix",
+    "audit:release": "python3 scripts/release-audit.py"
+  },
+  "dependencies": {
+    "acorn": "^8.15.0",
+    "acorn-walk": "^8.3.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.107.0",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^4.1.0",
+    "esbuild": "^0.25.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sqhao-O/kawaii-python.git"
+  },
+  "homepage": "https://github.com/Sqhao-O/kawaii-python#readme",
+  "bugs": {
+    "url": "https://github.com/Sqhao-O/kawaii-python/issues"
+  },
+  "author": "Sqhao-O",
+  "pricing": "Free",
+  "overrides": {
+    "@vscode/vsce": {
+      "minimatch": "^11.0.1"
+    }
+  }
+}

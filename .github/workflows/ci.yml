@@ -1,0 +1,55 @@
+name: Build and verify
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run catalog:check
+      - name: Audit public source
+        run: python scripts/release-audit.py
+      - name: Audit dependency vulnerabilities
+        run: npm audit
+      - run: npm run build
+      - name: Integration (Linux)
+        if: runner.os == 'Linux'
+        run: xvfb-run -a npm run test:integration
+        env:
+          KAWAII_REQUIRE_ERRORLENS: '1'
+          KAWAII_PYTHON: python
+      - name: Integration (macOS and Windows)
+        if: runner.os != 'Linux'
+        run: npm run test:integration
+        env:
+          KAWAII_REQUIRE_ERRORLENS: '1'
+          KAWAII_PYTHON: python
+      - run: npm run package
+      - name: Audit VSIX contents
+        run: python scripts/release-audit.py --vsix artifacts/kawaii-python-diagnostics-0.1.0.vsix
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verification-${{ runner.os }}
+          path: |
+            artifacts/
+            .cache/e2e/*.log
+            .cache/e2e/*.json

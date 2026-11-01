@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "upstream": "microsoft/pyright",
+  "commit": "0653de232eef08dd1ee79373e26f59cfcc0c015f",
+  "source": "packages/pyright-internal/src/localization/package.nls.zh-cn.json",
+  "license": "MIT",
+  "licenseFile": "third_party/pyright/LICENSE.txt",
+  "groups": {
+    "Diagnostic": 665,
+    "DiagnosticAddendum": 173
+  },
+  "baselineFile": "resources/original.zh-cn.json",
+  "baselineSha256": "920136903a7de3b446dd20638d3ed3d8ed0f4cba08c169094f5a18e6d06acaff",
+  "verifiedAt": "2026-11-01",
+  "verification": "All 838 flattened messages match the pinned public MIT-licensed upstream source."
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "adapter": "json-parse-v1",
+  "versions": {
+    "2026.4.1": {
+      "messageCount": 838,
+      "files": [
+        {
+          "path": "dist/pyright.bundle.js",
+          "tableHash": "e5f6bc5c46e28ac2f90f76fd7dd4914dd0f5ca4c9f67f43fa36ded835a1549a3",
+          "sha256": "13734286a005110347fd058693eb006a9eb4d0b05f3dfd32cddc286115c28ca8"
+        },
+        {
+          "path": "dist/browser.async.bundle.js",
+          "tableHash": "e5f6bc5c46e28ac2f90f76fd7dd4914dd0f5ca4c9f67f43fa36ded835a1549a3",
+          "sha256": "4373a8aed96509ce067fddcd3164b3ae2217fe0986773b41e52af5715dfd604c"
+        },
+        {
+          "path": "dist/browser.extension.bundle.js",
+          "tableHash": "e5f6bc5c46e28ac2f90f76fd7dd4914dd0f5ca4c9f67f43fa36ded835a1549a3",
+          "sha256": "97ec253187b782e9a2e1317a35238b6e60a58c3d6e28e06f0059a05663be681f"
+        },
+        {
+          "path": "dist/copilot-pyright.bundle.js",
+          "tableHash": "e5f6bc5c46e28ac2f90f76fd7dd4914dd0f5ca4c9f67f43fa36ded835a1549a3",
+          "sha256": "e6ae6123b929cbc5aaf68479304178509def2fa3e22efae365a28d66fb9a22fc"
+        }
+      ]
+    }
+  }
+}

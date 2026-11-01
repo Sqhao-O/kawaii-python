@@ -1,0 +1,31 @@
+name: Check Pylance stable updates
+on:
+  schedule:
+    - cron: '0 2 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: upstream
+        run: npm run upstream:check
+      - name: Install candidate in isolation
+        run: node scripts/install-candidate.mjs "${{ steps.upstream.outputs.latest }}"
+      - name: Extract candidate and report differences
+        shell: bash
+        run: |
+          candidate=$(node -e 'const fs=require("fs"),path=require("path");const root=".cache/candidate/extensions";for(const dir of fs.readdirSync(root)){try{const p=JSON.parse(fs.readFileSync(path.join(root,dir,"package.json")));if(p.publisher==="ms-python"&&p.name==="vscode-pylance")console.log(path.join(root,dir));}catch{}}')
+          node --import tsx scripts/maintain.ts extract "$candidate"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pylance-upstream-report
+          path: artifacts/

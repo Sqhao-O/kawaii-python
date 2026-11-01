@@ -1,0 +1,17 @@
+node_modules/
+dist/
+out/
+.cache/
+.vscode-test/
+artifacts/
+*.vsix
+.DS_Store
+.env
+.env.*
+.vsce
+.npmrc
+*.pem
+*.key
+*.p12
+*.pfx
+*.log
