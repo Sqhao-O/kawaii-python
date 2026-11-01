@@ -2,8 +2,8 @@
   "name": "kawaii-python-diagnostics",
   "displayName": "Kawaii Python Diagnostics",
   "description": "本地文案补丁：首次启用后修改 Pylance 中文消息表，自动备份并支持恢复。",
-  "version": "0.1.0",
-  "publisher": "kawaii-python",
+  "version": "0.1.1",
+  "publisher": "sqhao",
   "license": "MIT",
   "engines": {
     "vscode": "^1.107.0"
@@ -82,7 +82,7 @@
     "upstream:check": "node --import tsx scripts/maintain.ts upstream",
     "inspect": "node --import tsx scripts/maintain.ts inspect",
     "test:integration": "node scripts/integration.mjs",
-    "package": "npm run build && vsce package --no-dependencies --pre-release --out artifacts/kawaii-python-diagnostics-0.1.0.vsix",
+    "package": "node scripts/package.mjs",
     "audit:release": "python3 scripts/release-audit.py"
   },
   "dependencies": {

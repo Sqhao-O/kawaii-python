@@ -6,7 +6,11 @@
 
 > 笨蛋！「name」还没定义就想用啦？
 
-当前提供 **0.1.0 预览版**，精确适配 **Pylance 2026.4.1**。838 条消息包括 665 条主诊断、173 条附加诊断；不是统一追加后缀。风格包含“笨蛋”“哼”等轻度吐槽，请按个人偏好使用。
+当前提供 **0.1.1 预览版**，精确适配 **Pylance 2026.4.1**。838 条消息包括 665 条主诊断、173 条附加诊断；不是统一追加后缀。风格包含“笨蛋”“哼”等轻度吐槽，请按个人偏好使用。
+
+正式发布者标识为 `sqhao`，扩展完整标识为 **`sqhao.kawaii-python-diagnostics`**。
+
+[Marketplace 页面](https://marketplace.visualstudio.com/items?itemName=sqhao.kawaii-python-diagnostics) · [GitHub 发行包](https://github.com/Sqhao-O/kawaii-python/releases)
 
 ## 安装与使用
 
@@ -30,7 +34,7 @@
 命令行也可安装下载的 VSIX：
 
 ```sh
-code --install-extension ./kawaii-python-diagnostics-0.1.0.vsix
+code --install-extension ./kawaii-python-diagnostics-0.1.1.vsix
 ```
 
 插件不会自动修改显示语言、Python 设置或 Pylance 自动更新设置。首次安装不会修改 Pylance，必须先执行启用命令。
@@ -44,6 +48,10 @@ code --install-extension ./kawaii-python-diagnostics-0.1.0.vsix
 | 重载窗口 | 重新加载 Pylance |
 
 设置 `kawaiiPython.autoApplyUpdates` 默认开启，仅在用户曾主动启用后生效。未知版本保持官方原文；发布新兼容清单并通过全部检查后才会应用。
+
+## 从 0.1.0 迁移
+
+0.1.0 的离线预览包使用临时标识 `kawaii-python.kawaii-python-diagnostics`，与正式发布者下的扩展是两个不同条目。请先在旧扩展中执行 **恢复原版并停用**，重载后卸载旧扩展，再安装 `sqhao.kawaii-python-diagnostics` 并重新启用。不要同时启用两个条目。旧版 GitHub 发行包保留，便于追溯。
 
 ## 兼容范围
 

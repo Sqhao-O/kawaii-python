@@ -1,6 +1,8 @@
-# Kawaii Python Diagnostics 0.1.0 预览版
+# Kawaii Python Diagnostics 0.1.1 预览版
 
 保留 Pylance，将 838 条简体中文诊断替换为独立编写的可爱文案。适配 Pylance **2026.4.1**，其他版本拒绝修改。
+
+发布者为 **sqhao**，完整扩展标识为 `sqhao.kawaii-python-diagnostics`。从临时发布者的 0.1.0 升级时，先在旧扩展执行“恢复原版并停用”，重载、卸载旧扩展，再安装本版本。
 
 ## 安装
 
@@ -19,4 +21,4 @@
 - Windows、Linux、macOS 的真实 VS Code 隔离集成、打包和安全检查均已通过 [三平台 CI](https://github.com/Sqhao-O/kawaii-python/actions/runs/41268429524)；macOS 另完成原生 UI 和实际 VSIX 安装验证。此版本仍为预览版。
 - 不覆盖 Ruff/Pylint、运行时异常、Notebook、远程环境或英文诊断。
 
-GitHub Releases 提供离线安装包；VS Code Marketplace 上架是独立流程，以市场页面实际状态为准。
+GitHub Releases 提供离线安装包；VS Code Marketplace 标识为 `sqhao.kawaii-python-diagnostics`，上架状态以市场页面实际状态为准。

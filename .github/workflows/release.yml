@@ -24,11 +24,12 @@ jobs:
       - run: npm audit
       - run: python scripts/release-audit.py
       - run: npm run package
-      - run: python scripts/release-audit.py --vsix artifacts/kawaii-python-diagnostics-0.1.0.vsix
+      - run: python scripts/release-audit.py --vsix
       - name: Prepare checksums
         run: |
+          version=$(node -p 'require("./package.json").version')
           cd artifacts
-          sha256sum kawaii-python-diagnostics-0.1.0.vsix > SHA256SUMS.txt
+          sha256sum "kawaii-python-diagnostics-$version.vsix" > SHA256SUMS.txt
       - name: Publish audited VSIX and checksum
         env:
           GH_TOKEN: ${{ github.token }}

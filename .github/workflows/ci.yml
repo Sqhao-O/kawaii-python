@@ -44,7 +44,7 @@ jobs:
           KAWAII_PYTHON: python
       - run: npm run package
       - name: Audit VSIX contents
-        run: python scripts/release-audit.py --vsix artifacts/kawaii-python-diagnostics-0.1.0.vsix
+        run: python scripts/release-audit.py --vsix
       - uses: actions/upload-artifact@v4
         if: always()
         with:

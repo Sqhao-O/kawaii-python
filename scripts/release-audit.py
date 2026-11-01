@@ -97,11 +97,16 @@ def inspect_entries(entries):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--vsix', type=Path)
+    parser.add_argument('--vsix', nargs='?', const='auto')
     parser.add_argument('--manifest', type=Path)
     args = parser.parse_args()
     if args.vsix:
-        with zipfile.ZipFile(args.vsix) as archive:
+        if args.vsix == 'auto':
+            manifest = json.loads((ROOT / 'package.json').read_text(encoding='utf-8'))
+            vsix = ROOT / 'artifacts' / f"{manifest['name']}-{manifest['version']}.vsix"
+        else:
+            vsix = Path(args.vsix)
+        with zipfile.ZipFile(vsix) as archive:
             entries = [(entry.filename, archive.read(entry)) for entry in archive.infolist() if not entry.is_dir()]
         count, findings = inspect_entries(entries)
         files = [name for name, _ in entries]
