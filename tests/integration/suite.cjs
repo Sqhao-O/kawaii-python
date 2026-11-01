@@ -22,7 +22,9 @@ exports.run = async function () {
   await stableDiagnostics(doc.uri);
   if (phase === 'warmup') return;
   assert.equal(vscode.env.language.toLowerCase(), 'zh-cn');
-  await vscode.extensions.getExtension('kawaii-python.kawaii-python-diagnostics').activate();
+  const extension = vscode.extensions.getExtension(process.env.KAWAII_E2E_EXTENSION_ID);
+  assert.ok(extension, '被测试的扩展未安装或未加载');
+  await extension.activate();
   if (phase === 'enable' || phase === 'restore' || phase === 'reset') {
     await vscode.commands.executeCommand(phase === 'enable' ? 'kawaiiPython.enable' : 'kawaiiPython.restore');
     return;

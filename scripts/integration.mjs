@@ -7,6 +7,8 @@ import { testExecutable, testCli } from './vscode.mjs';
 import { build } from 'esbuild';
 
 const project = process.cwd();
+const extensionManifest = JSON.parse(await fs.readFile(path.join(project, 'package.json'), 'utf8'));
+const extensionId = `${extensionManifest.publisher}.${extensionManifest.name}`;
 const root = path.resolve(process.env.KAWAII_TEST_ROOT || '.cache/e2e');
 const extensions = path.join(root, 'extensions'), userData = path.join(root, 'user-data');
 const version = process.env.KAWAII_PYLANCE_VERSION || '2026.4.1';
@@ -80,7 +82,7 @@ async function phase(name) {
   const launch = ['--user-data-dir', userData, '--extensions-dir', extensions, `--extensionDevelopmentPath=${developmentPath}`, `--extensionTestsPath=${path.join(project, 'tests/integration/suite.cjs')}`, '--locale=zh-cn', '--skip-welcome', '--skip-release-notes', '--disable-workspace-trust'];
   if (process.platform === 'linux') launch.push('--no-sandbox', '--disable-gpu');
   launch.push(path.join(root, 'workspace'));
-  await run(vscode, launch, { KAWAII_E2E_ROOT: root, KAWAII_E2E_PHASE: name }, path.join(root, `${name}.log`));
+  await run(vscode, launch, { KAWAII_E2E_ROOT: root, KAWAII_E2E_PHASE: name, KAWAII_E2E_EXTENSION_ID: extensionId }, path.join(root, `${name}.log`));
 }
 await phase('warmup'); // A language pack's first startup can still initialize in English.
 await phase('reset');

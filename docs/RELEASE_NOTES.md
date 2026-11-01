@@ -16,7 +16,7 @@
 - 本项目为 MIT 开源；原始消息已逐条对照公开 Pyright 历史版本，完整第三方许可随包保留。
 - 源码和 VSIX 均经过敏感信息规则扫描；缓存、凭据、私钥、本机路径和运行日志不随包发布。
 - 运行时不上传用户源码或遥测，不下载远程补丁。
-- macOS 已完成隔离、原生 UI 和实际 VSIX 安装验证；Windows/Linux 的真实集成结果见仓库 Actions，未通过前不作为正式稳定版承诺。
+- Windows、Linux、macOS 的真实 VS Code 隔离集成、打包和安全检查均已通过 [三平台 CI](https://github.com/Sqhao-O/kawaii-python/actions/runs/41268429524)；macOS 另完成原生 UI 和实际 VSIX 安装验证。此版本仍为预览版。
 - 不覆盖 Ruff/Pylint、运行时异常、Notebook、远程环境或英文诊断。
 
 GitHub Releases 提供离线安装包；VS Code Marketplace 上架是独立流程，以市场页面实际状态为准。

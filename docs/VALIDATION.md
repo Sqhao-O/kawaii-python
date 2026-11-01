@@ -36,8 +36,14 @@
 
 ## 公开 CI 补充记录（2026-11-01）
 
-源码已上传到公开仓库，并运行 [三平台验证工作流](https://github.com/Sqhao-O/kawaii-python/actions/runs/41268158329)。Linux 的真实 VS Code 隔离集成、打包及安全检查已通过；Windows 单元测试通过（符号链接创建测试因权限条件跳过），首次集成运行发现测试脚本的 CLI 路径问题，需修复后重跑。macOS 的本机完整验证已通过，远程 CI 结果另行更新。
+源码已上传到公开仓库。[修复 Windows CLI 启动方式后的三平台验证工作流](https://github.com/Sqhao-O/kawaii-python/actions/runs/41268429524) 已全部通过：
+
+| CI 平台 | 结果 |
+| --- | --- |
+| Ubuntu / Linux | 单元测试、真实 VS Code 隔离集成、打包、安全扫描通过 |
+| Windows | 单元测试、真实 VS Code 隔离集成、打包、安全扫描通过；符号链接创建测试按权限条件跳过 |
+| macOS | 单元测试、真实 VS Code 隔离集成、打包、安全扫描通过；另有本机原生界面及 VSIX 安装验证 |
 
 VS Code 最低声明版本 1.107.0 未在本次环境中单独实测。Linux 的 CI 是无头环境的诊断/API 集成验证，不等于人工界面验收。
 
-在 Windows 实际集成完成前，0.1.0 保持预览版。新 Pylance 版本、其他语言、远程环境、Notebook 和运行时异常均不在本记录的通过范围内。
+0.1.0 仍按预览版发布，不扩大已测试的 Pylance 精确版本范围。新 Pylance 版本、其他语言、远程环境、Notebook 和运行时异常均不在本记录的通过范围内。
